@@ -425,7 +425,7 @@ export const forgoutPasswordController = async (req, res) => {
   });
 
   // URL del enlace para resetear la contraseña, debes definir esta ruta en tu servidor
-  const resetPasswordLink = `https://hellastore.up.railway.app/new-password/${token}`;
+  const resetPasswordLink = `https://blanca-sanchez-production.up.railway.app/new-password/${token}`;
 
   // Enviar el correo con el enlace de reseteo de contraseña
   try {

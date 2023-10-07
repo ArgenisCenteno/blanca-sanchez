@@ -74,45 +74,7 @@ body{
   justify-content: center;
 }
 
-.pnf-title {
-  font-size: 100px;
-  font-weight: 700;
-}
 
-.pnf-heading {
-  font-weight: normal;
-}
-
-.pnf-btn {
-  color: #ffff;
-  border: 1px solid #125E8A;
-  background: #059669; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #0e7490,
-    #017752
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #0e7490,
-    #037953
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-}
-.pnf-btn:hover {
-  background-color: black;
-  color: white;
-}
-/* ========================================= */
-/* =========contact us ========= */
-.contactus {
-  margin: 0;
-  padding: 0;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* ==================== */
 .product-link {
@@ -732,7 +694,8 @@ body{
   .iconHeaderPrincipal {
     position: absolute; /* Cambia la posición a relativa para ajustar el centrado */
    
-    top: 24%;  
+    margin-top: 12px;
+    top: 1%;  
     right: 40%;
     left: 40%;
    
@@ -748,7 +711,8 @@ body{
   .iconHeaderPrincipal {
     position: absolute; /* Cambia la posición a relativa para ajustar el centrado */
     
-    top: 24%;  
+    margin-top: 12px;
+    top: 1%;  
     left: 30%;
     right: 30%;  
     
@@ -764,12 +728,12 @@ body{
     position: relative; /* Asegura que el navbar sea el marco de referencia */
   }
   .iconHeaderPrincipal {
-    position: absolute; /* Cambia la posición a relativa para ajustar el centrado */
-     
-    top: 24%;  
+    position: absolute; /* Cambia la posición a relativa para ajustar el centrado */ 
+    top:  1%;  
     right: 44%;  
     left: 44%; 
    
+    margin-top: 12px;
     z-index: 999;
     list-style: none;
   }
@@ -785,7 +749,8 @@ body{
   .iconHeaderPrincipal {
     position: absolute; /* Cambia la posición a relativa para ajustar el centrado */
      
-    top: 24%;  
+    margin-top: 12px;
+    top: 1%;  
     right: 44%;  
     left: 44%; 
    

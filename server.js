@@ -29,6 +29,12 @@ app.use(morgan("dev"));
 
 app.use(express.static(path.join(__dirname, './client/build')));
 
+app.use('/static/media', express.static(path.join(__dirname, './client/build/static/media'), {
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Establece el tiempo máximo de caché a 1 día (86400 segundos) para imágenes
+  }
+}));
+
 // Middleware para agregar Cache-Control a las respuestas de imágenes
 /*app.use('/static', express.static(path.join(__dirname, './client/build'), {
   setHeaders: (res, path) => {

@@ -335,6 +335,7 @@ const CreateProduct = () => {
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
+             <option value="" >Elija el genero</option>
             <option value="hombre">Hombre</option>
             <option value="mujer">Mujer</option>
             <option value="niño">Niño</option>

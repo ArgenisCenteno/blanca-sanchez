@@ -177,7 +177,7 @@ const Header = () => {
             </ul>
           </div>
          <ul  >
-          <li className="iconHeaderPrincipal" style={{listStyle: "none"}}>
+         <li className="iconHeaderPrincipal" style={{listStyle: "none"}}>
               <Link to={"/"} className="navbar-brand text-success d-lg-none" >
             <img src={hella}  alt="logo-blanca" width="50px" height="50px" />
 

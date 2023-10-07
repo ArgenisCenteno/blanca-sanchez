@@ -18,7 +18,7 @@ export default function PrivateRoute() {
       }
     };
     if (auth?.token) authCheck(); // Verifica si existe un token de autenticación. Si es así, realiza la verificación de autenticación.
-  }, [auth?.token]);
+  }, [auth?.token]); 
 
   return ok ? <Outlet /> : <Spinner />;
   // Si la autenticación es exitosa (ok = true), muestra el componente Outlet, que representa el contenido privado.

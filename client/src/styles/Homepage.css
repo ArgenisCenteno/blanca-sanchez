@@ -2,27 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap");
 
 
-.banner-img {
-  margin-top: 60px;
-  height: 400px;
-}
 
-.home-page h1 {
-  color: #059669;
-  font-family: "roboto", serif;
-}
-
-.home-page {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100vw !important;
-}
-
-.home-page .card {
-  background-color: rgba(128, 128, 128, 0.097);
-  width: 18rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
 
 .home-page .card-name-price {
   display: flex;
@@ -52,136 +32,11 @@
 .home-page .card-img-top {
   height: 300px !important;
 }
-/* ==================
-FILTROS
-============== */
-
-.filters{
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-.filters h4 {
-  margin-top: 100px;
-  color: gray !important;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.337);
-  padding-bottom: 14px;
-}
-
-.ant-checkbox-wrapper:first-of-type {
-  margin-left: 8px;
-}
-
-.ant-checkbox-wrapper {
-  margin: 2px;
-}
-.ant-radio-wrapper {
-  margin-bottom: 5px !important;
-  margin-left: 10px;
-}
-
-.filters button {
-  color: #ffff;
-  border: 1px solid #059669;
-  background: #059669; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #0e7490,
-    #017752
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #0e7490,
-    #037953
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-   
-}
-.filters button:hover {
-  color: #ffff;
-  border: 1px solid #047450;
-  background: #047450; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #0c6179,
-    #047450
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #0c6179,
-    #047450
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-   
-}
-
-.loadmore {
-  color: #ffff;
-  font-weight: bold;
-  font-size: 20px !important;
-  background: #059669; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #0e7490,
-    #017752
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #0e7490,
-    #037953
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
  
-.AgregarCarrito{
-  color: #ffff;
-  border: 1px solid #057c56;
-  background: #057c56; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #045166,
-    #057c56
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #045166, 
-    #057c56
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-}
+ 
 
-.AgregarCarrito:hover{
-  color: #ffff !important;
-   
-  border: 1px solid #046446;
-  background: #046446; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #044557,
-    #046446
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #044557,
-    #046446
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-}  
-
-.verDetalles{
-  color: #ffff;
-  border: 1px solid #05397c;
-  background: #05397c; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #05397c,
-    #055a7c
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #05397c,
-    #055a7c
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 100%;
-}
+ 
+ 
 
 .unavailable-label {
   color: red;
@@ -200,20 +55,4 @@ FILTROS
   justify-content: center;
 }
 
-@media (max-width: 768px) {
-   .card-products {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-
-@media screen and (max-width: 280px) {
-  .home-page .card {
-    background-color: rgba(128, 128, 128, 0.097);
-    width: 16rem;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    margin-left: 33px !important;
-  }
-    
-  }
+ 

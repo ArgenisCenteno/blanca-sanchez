@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from "./../components/Layout/Layout"; 
 import { Link, useParams } from 'react-router-dom';
-import axios from "axios"; 
-import { toast } from 'react-hot-toast';
-import "../styles/GenderStyles.css";
+import axios from "axios";  
 
 const Gender = () => {
   const [products, setProducts] = useState([]); 

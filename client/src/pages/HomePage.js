@@ -1,32 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {  Link, useNavigate } from "react-router-dom"; 
+import {  Link } from "react-router-dom"; 
 import axios from "axios"; 
-import Layout from "./../components/Layout/Layout"; 
-import image from "./img/image.png";
+import Layout from "./../components/Layout/Layout";  
 import "../styles/Homepage.css";
 import Slider from "../components/Layout/Slider";
 import { sliderItems } from '../components/Layout/data/data.js';
  
 
-const HomePage = () => {
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState("");
-   
+const HomePage = () => { 
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [checked, setChecked] = useState([]);
-  const [radio, setRadio] = useState([]);
+  const [categories, setCategories] = useState([]); 
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [foundProducts, setFoundProducts] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Número de productos por página
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
-  };
+  const [foundProducts, setFoundProducts] = useState(true);   
 
   // OBTENER TODAS LAS CATEGORIAS
   const getAllCategory = async () => {
@@ -57,22 +43,7 @@ const HomePage = () => {
   
   
 
-  // OBTENER PRODUCTOS FILTRADOS POR CATEGORÍA
-  const getFilteredProducts = async (categoryId) => {
-    try {
-      setLoading(true);
-      const { data } = await axios.post("/api/v1/product/product-filters", {
-        checked: [categoryId],
-        radio,
-      });
-      setLoading(false);
-      setProducts(data.products);
-      setFoundProducts(data.products.length > 0);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
+   
 
   // OBTENER NUMERO TOTAL DE PRODUCTOS
   const getTotal = async () => {
@@ -83,93 +54,19 @@ const HomePage = () => {
       console.log(error);
     }
   };
-
-  // FILTRAR POR CATEGORIA
-  const handleFilter = async (value, id, name) => {
-    let all = [...checked];
-    if (value) {
-      all.push(id);
-      setSelectedCategory(name);
-    } else {
-      all = all.filter((c) => c !== id);
-      setSelectedCategory("");
-    }
-    setChecked(all);
   
-    if (all.length === 0) {
-      setLoading(true);
-      await getAllProducts();
-    } else {
-      setLoading(true);
-      await getFilteredProducts(id);
-    }
-  };
-  
-  // Resetear filtros y obtener todos los productos
-  const resetFilters = () => {
-    setChecked([]);
-    setRadio([]);
-    getAllProducts();
-    setFoundProducts(true);
-  };
 
   useEffect(() => {
     getAllCategory();
     getTotal();
-    
+    getAllProducts()
   }, []); // Asegúrate de agregar currentPage como dependencia aquí
 
-  useEffect(() => {
-    // Aplicar filtros cuando cambien los checkboxes o radios
-    if (checked.length === 0) {
-      setLoading(true);
-      getAllProducts();
-    } else {
-      setLoading(true);
-      filterProduct();
-    }
-  }, [checked, radio]);
-  
-
-  useEffect(() => {
-    if (!checked.length ) getAllProducts();
-  }, [checked.length, radio.length]);
-
-  useEffect(() => {
-    if (checked.length ) filterProduct();
-  }, [checked, radio]);
-
-  // OBTENER PRODUCTO FILTRADO
-  const filterProduct = async () => {
-    try {
-      const { data } = await axios.post("/api/v1/product/product-filters", {
-        checked,
-        radio,
-      });
-      setProducts(data?.products);
-      setFoundProducts(data.products.length > 0);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (checked.length === 0) {
-      setFoundProducts(true);
-    }
-  }, [checked]);
-
-  useEffect(() => {
-    if (selectedCategory) {
-      document.title = `Resultado de ${selectedCategory}`;
-    } else {
-      document.title = "Blanca Sánchez";
-    }
-  }, [selectedCategory]);
- 
+    
+   
   return (
     <>
-      <Layout title={selectedCategory ? `Resultado de ${selectedCategory}` : "Blanca Sánchez"} >
+      <Layout title={"Blanca Sánchez"} >
         <Slider slides={sliderItems} /> 
        
         <div className="container"  >

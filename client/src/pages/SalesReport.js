@@ -96,7 +96,8 @@ const SalesReport = () => {
         'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
       ];
-  
+ 
+      setOrders(orders)
       setLabels(monthNames);
       setMonthlyOrderCounts(monthlyOrderCounts);
       setMonthlyTotalSales(monthlyTotalSales);
@@ -280,7 +281,7 @@ const SalesReport = () => {
                 onChange={handleDateRangeChange}
                 className="form-select m-1"
               >
-                <option value="">Seleccionar rango</option>
+               
                 <option value="today">Hoy</option>
                 <option value="yesterday">Ayer</option>
                 <option value="thisWeek">Esta semana</option> 

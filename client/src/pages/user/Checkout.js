@@ -159,7 +159,18 @@ const Checkout = () => {
           <h4 style={{ color: '#495057' }}>Detalles de entrega</h4>
         </div>
         <form className="mb-0" onSubmit={handleSubmit}>
+        <div className="col">
+            <div className="form-group mt-3">
+          <div className="form-check">
+
+                <input type="checkbox" className="form-check-input" onChange={handleCheckboxChange} />
+                <strong><h4 className="form-check-label text-primary">¿Eres de Punta de Mata?</h4></strong>
+
+              </div>
+              </div>
+            </div>
           <div className="row mb-4">
+           
             <div className="col">
             <div className="form-group">
                 <strong><label className="form-label">Estado:</label></strong>
@@ -225,12 +236,7 @@ const Checkout = () => {
               <div className="col">
               
               </div>
-              <div className="form-group mt-3">
-          <div className="form-check">
-                <input type="checkbox" className="form-check-input" onChange={handleCheckboxChange} />
-                <strong><label className="form-check-label">Soy de Punta de Mata</label></strong>
-              </div>
-              </div>
+              
           </div>
           <div className="float-end">
             {/* Submit button */}

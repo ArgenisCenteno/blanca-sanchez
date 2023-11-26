@@ -116,8 +116,10 @@ const SalesReport = () => {
       } else {
         const response = await axios.get(`/api/v1/product/getFilterOrders/${dateRange}`);
         filteredOrders = response.data;
+        console.log(filteredOrders = response.data)
       }
   
+      
       const doc = new jsPDF();
       doc.text('Reporte de Ventas', 10, 10);
   
@@ -128,6 +130,7 @@ const SalesReport = () => {
       filteredOrders.forEach(order => {
         const rowData = [
           order._id,
+          order.buyer.name,
           new Date(order.createdAt).toLocaleDateString(),
           `$${order.total.toFixed(2)}` // Formatear el total como moneda
         ];
@@ -137,7 +140,7 @@ const SalesReport = () => {
       });
   
       // Agregar encabezados de columnas
-      const headers = [['ID Orden', 'Fecha', 'Total']];
+      const headers = [['ID Orden','Comprador', 'Fecha', 'Total']];
       doc.autoTable({
         startY: 20,
         head: headers,

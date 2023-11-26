@@ -4,7 +4,7 @@ import axios from "axios";
 import Layout from "./../components/Layout/Layout";  
 import "../styles/Homepage.css";
 import Slider from "../components/Layout/Slider";
-import { sliderItems } from '../components/Layout/data/data.js';
+import { sliderItems } from '../components/Layout/data/data.js'; 
  
 
 const HomePage = () => { 
@@ -66,7 +66,7 @@ const HomePage = () => {
    
   return (
     <>
-      <Layout title={"Blanca Sánchez"} >
+      <Layout title={"Blanca Sánchez"} > 
         <Slider slides={sliderItems} /> 
        
         <div className="container"  >

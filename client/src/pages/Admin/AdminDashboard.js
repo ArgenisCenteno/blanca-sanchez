@@ -11,6 +11,7 @@ import OrderChart from "./OrderChart";
 import OrderDay from "./OrderDay";
 import { ProductSaleChart } from "./ProductSaleChart";
 import IncomeSaleChart from "./IncomeSaleChart";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [auth] = useAuth();
@@ -59,15 +60,20 @@ const AdminDashboard = () => {
            
             <div className="row mt-4">
               <div className="col-md-3 mt-3">
+                <Link to={"products"} style={{textDecoration: "none"}}>
                 <div className="card" style={{border: "none"}}>
                   <div className="card-body bg-success">
                     <h5 className="card-title text-white">Total de Productos</h5>
                     <p className="card-text text-white">{totalProducts}</p>
+                    
                     <Inventory2Icon  style={{color: "white"}}/>
+                    
                   </div>
                 </div>
+                </Link>
               </div>
               <div className="col-md-3 mt-3">
+              <Link to={"orders"} style={{textDecoration: "none"}}>
                 <div className="card" style={{border: "none"}}>
                   <div className="card-body  bg-danger">
                     <h5 className="card-title text-white">Total de Órdenes</h5>
@@ -75,17 +81,21 @@ const AdminDashboard = () => {
                     <CategoryIcon style={{color: "white"}}/>
                   </div>
                 </div>
+                </Link>
               </div>
               <div className="col-md-3 mt-3">
+              <Link to={"create-category"} style={{textDecoration: "none"}}>
                 <div className="card" style={{border: "none"}}>
                   <div className="card-body  bg-warning">
-                    <h5 className="card-title">Total de Categorías</h5>
-                    <p className="card-text">{totalCategories}</p>
+                    <h5 className="card-title text-black">Total de Categorías</h5>
+                    <p className="card-text text-black">{totalCategories}</p>
                     <LoyaltyIcon/>
                   </div>
                 </div>
+                </Link>
               </div>
               <div className="col-md-3 mt-3">
+              <Link to={"users"} style={{textDecoration: "none"}}>
                 <div className="card" style={{border: "none"}}>
                   <div className="card-body   bg-info  text-white">
                     <h5 className="card-title text-white">Total de Usuarios</h5>
@@ -93,6 +103,7 @@ const AdminDashboard = () => {
                     <PeopleAltIcon/>
                   </div>
                 </div>
+                </Link>
               </div>
              
             </div>

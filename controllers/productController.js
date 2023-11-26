@@ -364,29 +364,24 @@ export const createOrderController = async (req, res) => {
   try {
     const { cart, formData, userId } = req.body;
     let total = 0;
-    cart.map((item) => {
+    let subTotal = 0;
+
+    cart.forEach((item) => {
       const itemTotal = item.price * item.quantity;
       total += itemTotal;
-     
 
+      subTotal += itemTotal;
     });
 
     total += formData.tasaEnvio;
     total = Number(total.toFixed(2));
+    subTotal = Number(subTotal.toFixed(2));
 
-    let subTotal = 0;
-    cart.map((item) => {
-      const itemTotal = item.price * item.quantity;
-      subTotal += itemTotal; 
-      subTotal = Number(subTotal.toFixed(2));
-
-    });
-    
     const order = new orderModel({
       products: cart,
       buyer: userId,
       address: formData,
-      total: total, // Agregar el total de la orden
+      total: total,
       subtotal: subTotal,
       isPaid: false,
     });
@@ -398,11 +393,18 @@ export const createOrderController = async (req, res) => {
     await Promise.all(
       cart.map(async (item) => {
         const product = await productModel.findOneAndUpdate(
-          { _id: item._id, "variations.size": item.size },
-          { $inc: { "variations.quantity": -item.quantity }, 
-          $inc: { sale: +item.quantity } ,
-        },
-          
+          {
+            _id: item._id,
+            "variations": {
+              $elemMatch: { size: item.size },
+            },
+          },
+          {
+            $inc: {
+              "variations.$.quantity": -item.quantity,
+              sale: +item.quantity,
+            },
+          },
           { new: true }
         );
       })
@@ -413,7 +415,8 @@ export const createOrderController = async (req, res) => {
     console.log(error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
+
 
 const getPaypalBearerToken = async(req, res)  => {
     
@@ -522,6 +525,36 @@ export const paypalPayController = async (req, res) =>{
     paymentMethod: "Paypal"
   };
   dbOrder.isPaid = true;
+  await dbOrder.save(); 
+
+  // Envía el correo electrónico al administrador con el enlace a la orden
+  await sendEmailToAdmin(orderId, mountTotal);
+
+  return res.status(200).json({ message: 'Orden pagada' });
+}
+
+export const payWithBank = async (req, res) =>{
+  
+  const { banco, monto, codigoReferencia, tipoTransaccion , orderId } = req.body;
+ 
+ console.log(banco, monto, codigoReferencia, tipoTransaccion , orderId)
+  const dbOrder = await orderModel.findById(orderId);
+
+  if ( !dbOrder ) {
+      await db.disconnect();
+      return res.status(400).json({ message: 'Orden no existe en nuestra base de datos' });
+  }
+  
+   
+
+  const mountTotal = dbOrder.total;
+  dbOrder.payment = {
+    transactionId: codigoReferencia,
+    paymentMethod:  tipoTransaccion,
+    bank: banco,
+    total: monto
+  };
+  dbOrder.isPaid = false;
   await dbOrder.save(); 
 
   // Envía el correo electrónico al administrador con el enlace a la orden
@@ -674,7 +707,7 @@ export const getFilteredOrders = async (req, res) => {
   try {
     const filteredOrders = await orderModel.find({
       createdAt: { $gte: startDate, $lte: endDate }
-    }).populate('products'); 
+    }).populate('buyer' ) ; 
     console.log(filteredOrders)
     res.json(filteredOrders);
   } catch (error) {

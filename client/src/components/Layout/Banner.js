@@ -2,6 +2,7 @@ import React from 'react'
 import StoreIcon from '@mui/icons-material/Store';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   return (
@@ -50,7 +51,7 @@ const Banner = () => {
               <h6 className="text-uppercase  mb-4">Contacto</h6>
                <p><LocationOnIcon/>  Punta de Mata</p>
                
-              <p><WhatsAppIcon/> 04129874785</p>
+              <Link  style={{textDecoration: "none"}}><WhatsAppIcon/> 04129874785</Link>
  
             </div>
             

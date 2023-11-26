@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema(
     photo: {
       type: String,  
       required: true, 
-    } ,
+    } ,  
     variations: [{
       size    : { type: String },
       quantity: { type: Number, required: true },

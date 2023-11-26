@@ -8,6 +8,7 @@ import {
   getProductController,
   getSingleProductController,
   getTopSaleProducts,
+  payWithBank,
   paypalPayController,
   productCategoryController,
   productCountController,
@@ -77,6 +78,7 @@ router.get("/product-sales", getTopSaleProducts);
 //RUTA DE PAGOS
  
 router.post("/paypal-pay", requireSignIn, paypalPayController)
+router.post("/paywithbank", requireSignIn, payWithBank)
 router.post("/create-order", requireSignIn, createOrderController)
 router.get("/getFilterOrders/:dateRange", getFilteredOrders)
 

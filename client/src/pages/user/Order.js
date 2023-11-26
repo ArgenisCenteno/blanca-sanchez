@@ -9,13 +9,44 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import CreditCardOffIcon from '@mui/icons-material/CreditCardOff';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import "../../styles/CartStyles.css";
- 
+import { Modal, Form, Input, Select, Button } from 'antd';
+
 const Order = () => { 
   const params = useParams();
   const [loading, setLoading] = useState(false); 
   const [orderData, setOrderData] = useState(null); // Estado para almacenar los datos de la orden
   const [isPaying, setIsPaying] = useState(false);
- 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // Función para abrir el formulario
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  // Función para cerrar el formulario
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onFinish = async(values) => {
+    // Aquí puedes manejar la lógica para enviar los datos del formulario
+    // Puedes enviar los datos al servidor, actualizar el estado, etc.
+    try {
+      const orderId = params._id;
+      const { data } = await  axios.post("/api/v1/product/paywithbank", {
+          values,
+          orderId, 
+      }); 
+      toast.success("Pago enviado ")
+      window.location.reload()  
+  } catch (error) {
+      setIsPaying(false); 
+      toast.error('Error al realizar el pago');
+  }
+    setIsModalVisible(false);
+  };
+
+
   useEffect(() => {
     setLoading(true);
     const getOrderData = async () => {
@@ -63,7 +94,7 @@ const Order = () => {
         <div className="card" style={{borderRadius: "10px"}}>
         
           <div className="card-header px-4 py-5 text-muted" style={{backgroundColor: "white"}} >
-             { orderData?.order?.isPaid  ? <h4 className="text-muted mb-0">¡Gracias por su compra!</h4> : <h4>Productos a pagar</h4> } 
+             { !orderData?.order?.payment && !orderData?.order?.isPaid   ? <h4 className="text-muted mb-0">¡Gracias por su compra!</h4> : <h4>Productos a pagar</h4> } 
            </div>
           <div className="card-body p-4">
           
@@ -168,7 +199,7 @@ const Order = () => {
         <strong>Estado de Pago</strong>
       </p>
            
-      { orderData?.order?.isPaid  ? (
+      { !orderData?.order?.payment && !orderData?.order?.isPaid  ? (
         
     <p className="text-center" style={{color: "#059669"}} ><CreditScoreIcon/> <strong>Orden Pagada</strong> </p>
   ) : (
@@ -200,10 +231,10 @@ const Order = () => {
               />)}
              
               </div>
-
-            <span className="span text-muted  mt-2  text-center "> <strong>Para pagar con pago móvil o transferencia bancaria, contactenos por Whatsapp</strong> </span>
+              <button className="btn btn-success  btn-lg btn-block mt-4 mb-4 "          onClick={showModal}>Pagar con Pago Movil/transferencia</button> <br/>
+              <span className="span text-muted  mt-2  text-center "> <strong>Atencion al cliente</strong> </span>
   <a href="https://wa.link/5ye7qg" target="_blank" style={{textDecoration: "none"}}>
-              <button className="btn btn-success btn-lg btn-block mt-4" style={{width: "100%"}}> <WhatsAppIcon/> WhatsApp</button>
+              <button className="btn btn-primary btn-lg btn-block mt-4" style={{width: "100%"}}> <WhatsAppIcon/> WhatsApp</button>
             </a>
 
               </>
@@ -218,6 +249,62 @@ const Order = () => {
       </div>
     </div>
   </div>
+
+  <Modal
+        title="Pagar con Pago Móvil/Transferencia"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <Form
+          name="paymentForm"
+          onFinish={onFinish}
+          initialValues={{ monto: (orderData?.order?.total * 35.53).toFixed(2) }}
+          >
+          <Form.Item
+            label="Banco"
+            name="banco"
+            rules={[{ required: true, message: 'Por favor, selecciona un banco' }]}
+          >
+             
+              <Input placeholder="Banco"/>
+          </Form.Item>
+
+          <Form.Item
+            label="Monto"
+            name="monto"
+            rules={[{ required: true, message: 'Por favor, ingresa el monto' }]}
+          >
+            <Input disabled />
+          </Form.Item>
+
+          <Form.Item
+            label="Tipo de Transacción"
+            name="tipoTransaccion"
+            rules={[{ required: true, message: 'Por favor, selecciona el tipo de transacción' }]}
+          >
+            <Select>
+              {/* Opciones de tipo de transacción */}
+              <Select.Option value="pagoMovil">Pago Móvil</Select.Option>
+              <Select.Option value="transferencia">Transferencia</Select.Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            label="Código de Referencia"
+            name="codigoReferencia"
+            rules={[{ required: true, message: 'Por favor, ingresa el código de referencia' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Enviar Pago
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
 </section>
   </Layout>
   );

@@ -96,7 +96,7 @@ const Login = () => {
     <strong>Clave</strong>
   </label>
 
-  <div className="col-9">
+  <div className="col-12">
     <div style={{ position: "relative" }}>
       <input
         onChange={onChange}

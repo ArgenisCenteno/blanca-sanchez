@@ -191,7 +191,7 @@ const Register = () => {
                     <label className="form-label">
                       <strong>Clave</strong>
                     </label>
-                    <div className="col-9" style={{ position: "relative" }}>
+                    <div className="col-12" style={{ position: "relative" }}>
                       <input
                         onChange={(e) => setPassword(e.target.value)}
                         type={shown ? "text" : "password"}
@@ -232,7 +232,7 @@ const Register = () => {
                     <label className="form-label">
                       <strong>Confirmar Clave</strong>
                     </label>
-                    <div className="col-9" style={{ position: "relative" }}>
+                    <div className="col-12" style={{ position: "relative" }}>
                       <input
                         onChange={(e) => setConfirmedPassword(e.target.value)}
                         type={confirmedShown ? "text" : "password"}
